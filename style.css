@@ -1,0 +1,131 @@
+@font-face {
+    font-family: "Minecraft";
+    src: url("source/font/minecrafter.reg-webfont.woff2") format('woff2'),
+    url("source/font/minecrafter.reg-webfont.woff") format('woff');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #1E90FF;
+}
+
+h1 {
+    font-family: Minecraft, serif;
+    font-weight: normal;
+    text-align: center;
+    color: aliceblue;
+    font-size: 54px;
+}
+
+.game-info-container {
+    grid-column: 1 /-1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-info {
+    font-family: Minecraft, serif;
+    color: aliceblue;
+    font-size: 26px;
+}
+
+.game-container{
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 10px; 
+    margin: 50px;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.card {
+    position: relative;
+    height: 175px;
+    width: 125px;
+}
+
+.card-face  {
+    position: absolute;
+    height : 100%;
+    width : 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    transition: transform 500ms ease-in-out;
+}
+
+.card:hover .card-back {
+    transform: scale(0.95);
+}
+
+
+.card.visible .card-back {
+    transform: rotateY(-180deg);
+}
+
+.card.visible .card-front {
+    transform: rotateY(0deg);
+}
+
+.card-back {
+    background-color: white;
+    border-style: solid;
+}
+
+.card-front {
+    background-color: greenyellow;
+    border-style: solid;
+    transform: rotateY(180deg);
+}
+
+.overlay-text {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    color: greenyellow;
+    font-family: Minecraft,serif;
+}
+
+.overlay-text-small {
+    margin-top: 15px;
+    font-size: .4em;
+}
+
+.overlay-text.visible {
+    display: flex;
+    flex-direction: column;
+    animation: overlay-grow 500ms forwards;
+}
+
+@keyframes overlay-grow {
+    form {
+        background-color: rgba(0,0,0,0);
+        font-size: 0;
+    }
+    to {
+        background-color: rgba(0,0,0,0.5);
+        font-size: 5em;
+    }
+}
+
+@media (max-width: 600px) {
+    .game-container{
+        grid-template-columns: repeat(2, auto);
+    }
+    
+    .game-info-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
